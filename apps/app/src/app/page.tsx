@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { ExampleLayout } from "@/components/example-layout";
 import { useGenerativeUIExamples, useExampleSuggestions } from "@/hooks";
 import { ExplainerCardsPortal } from "@/components/explainer-cards";
+import { AssistantHtmlFallback } from "@/components/assistant-html-fallback";
 
 import { CopilotChat } from "@copilotkit/react-core/v2";
 
@@ -31,7 +32,8 @@ export default function HomePage() {
 
       {/* App shell */}
       <div className="brand-shell" style={{ position: "relative", zIndex: 1 }}>
-        <div className="brand-glass-container">
+      <div className="brand-glass-container">
+          <AssistantHtmlFallback />
           {/* CTA Banner */}
           <div
             className="shrink-0 border-b border-white/30 dark:border-white/8"
