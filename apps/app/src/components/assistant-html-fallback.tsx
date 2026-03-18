@@ -10,7 +10,22 @@ const roots = new WeakMap<HTMLElement, Root>();
 function looksLikeHtml(html: string) {
   const text = html.trim();
   if (!text.startsWith("<")) return false;
-  return /<(div|section|article|main|svg|canvas|style|script|table|form|button|input)\b/i.test(text);
+  return /<(html|body|div|section|article|main|svg|canvas|style|script|table|form|button|input|!doctype)\b/i.test(text);
+}
+
+function normalizeHtml(html: string) {
+  const text = html.trim();
+  if (!/^<!doctype|^<html\b/i.test(text)) return text;
+
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(text, "text/html");
+  const headContent = Array.from(doc.head.children)
+    .filter((node) => ["STYLE", "SCRIPT"].includes(node.tagName))
+    .map((node) => node.outerHTML)
+    .join("\n");
+  const bodyContent = doc.body.innerHTML.trim();
+
+  return [headContent, bodyContent].filter(Boolean).join("\n");
 }
 
 function extractHtmlFromCodeBlock(pre: HTMLPreElement) {
@@ -20,7 +35,7 @@ function extractHtmlFromCodeBlock(pre: HTMLPreElement) {
   const html = code.textContent?.trim() ?? "";
   if (!looksLikeHtml(html)) return null;
 
-  return html;
+  return normalizeHtml(html);
 }
 
 function renderFallback(pre: HTMLPreElement, html: string) {
