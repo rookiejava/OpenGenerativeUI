@@ -19,7 +19,7 @@ All visuals are rendered in sandboxed iframes with automatic light/dark theming,
 
 ```bash
 make setup    # Install deps + create .env template
-# Edit apps/agent/.env with your real OpenAI API key
+# Edit .env with your OpenAI or OpenAI-compatible model settings
 make dev      # Start all services
 ```
 
@@ -49,7 +49,7 @@ Turborepo monorepo with two apps:
 ```
 apps/
 ├── app/       Next.js 16 frontend (CopilotKit v2, React 19, Tailwind 4)
-└── agent/     LangGraph Python agent (GPT-5.4, CopilotKit middleware)
+└── agent/     LangGraph Python agent (OpenAI-compatible chat model, CopilotKit middleware)
 ```
 
 ### How It Works
@@ -99,6 +99,20 @@ apps/
 ## Tech Stack
 
 Next.js 16, React 19, Tailwind CSS 4, LangGraph, CopilotKit v2, Turborepo, Recharts
+
+## Model Configuration
+
+The agent uses `ChatOpenAI`, but it now reads standard OpenAI-compatible environment variables from the root `.env`:
+
+```bash
+OPENAI_API_KEY=your-api-key-or-dummy-value
+OPENAI_MODEL=gpt-5.4-2026-03-05
+OPENAI_BASE_URL=
+```
+
+- Leave `OPENAI_BASE_URL` empty to use OpenAI directly.
+- Set `OPENAI_BASE_URL` to a local OpenAI-compatible server such as `http://localhost:11434/v1` or `http://localhost:1234/v1`.
+- For local servers that do not require auth, keep `OPENAI_API_KEY` set to any non-empty dummy value.
 
 ## License
 

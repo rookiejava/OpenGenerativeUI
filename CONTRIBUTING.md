@@ -61,10 +61,10 @@ Or manually:
 
 ```bash
 pnpm install
-echo 'OPENAI_API_KEY=your-key-here' > apps/agent/.env
+cp .env.example .env
 ```
 
-Then add your real OpenAI API key to `apps/agent/.env`.
+Then update `.env` with your OpenAI or OpenAI-compatible model settings.
 
 ### 3) Run the Project
 

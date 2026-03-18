@@ -7,11 +7,11 @@ install: ## Install all dependencies (Node + Python)
 	pnpm install
 
 setup: install ## Full setup: install deps and create .env from template
-	@if [ ! -f apps/agent/.env ]; then \
-		echo "OPENAI_API_KEY=your-key-here" > apps/agent/.env; \
-		echo "Created apps/agent/.env — add your OpenAI API key"; \
+	@if [ ! -f .env ]; then \
+		cp .env.example .env; \
+		echo "Created .env — set your OpenAI or OpenAI-compatible model config"; \
 	else \
-		echo "apps/agent/.env already exists, skipping"; \
+		echo ".env already exists, skipping"; \
 	fi
 
 dev: ## Start all services (frontend + agent + mcp)
