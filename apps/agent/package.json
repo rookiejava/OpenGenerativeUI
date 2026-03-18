@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "npx @langchain/langgraph-cli dev --port 8123 --no-browser",
-    "postinstall": "uv sync"
+    "postinstall": "uv sync --python 3.12"
   },
   "devDependencies": {
     "@langchain/langgraph-cli": "^1.1.12"

@@ -66,6 +66,8 @@ cp .env.example .env
 
 Then update `.env` with your OpenAI or OpenAI-compatible model settings.
 
+Use Python 3.12 or 3.13 for `apps/agent`. Python 3.14 currently fails while building `jsonschema-rs` through PyO3.
+
 ### 3) Run the Project
 
 ```bash

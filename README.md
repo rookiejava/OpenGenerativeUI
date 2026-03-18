@@ -23,6 +23,8 @@ make setup    # Install deps + create .env template
 make dev      # Start all services
 ```
 
+Python 3.12 or 3.13 is required for `apps/agent`. Python 3.14 currently breaks `jsonschema-rs` via PyO3 during `uv sync`.
+
 - **App**: http://localhost:3000
 - **Agent**: http://localhost:8123
 
